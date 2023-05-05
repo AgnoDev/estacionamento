@@ -1,49 +1,30 @@
-package com.api.estacionamento.models;
+package com.api.estacionamento.dtos;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.UUID;
+public class ParkingSpotDto {
 
-@Entity
-@Table(name = "TB_PARKING_SPOT ")
-public class ParkingSpotModel implements Serializable { //utilizado para conversões de dados pela JVM
-    private static final long serialVersionUID = 1L;
-
-/*poderia ser feita uma classe 'carro' e gerar relacionamento
-* entre 'carro' e 'vaga' pra não ficar tudo junto aqui*/
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private static UUID id;
-    @Column(nullable = false, unique = true, length = 10)
+    @NotBlank
     private String parkingSpotNumber;
-    @Column(nullable = false, unique = true, length = 7)
+    @NotBlank
+    @Size(max = 7)
     private String licensePlaceCar;
-    @Column(nullable = false, length = 70)
+    @NotBlank
     private String brandCar;
-    @Column(nullable = false, length = 70)
+    @NotBlank
     private String modelCar;
-    @Column(nullable = false, length = 70)
+    @NotBlank
     private String colorCar;
-    @Column(nullable = false)
-    private LocalDateTime registrationDate;
-    @Column(nullable = false, length = 130)
+    @NotBlank
     private String responsibleName;
-    @Column(nullable = false, length = 30)
+    @NotBlank
     private String apartment;
-    @Column(nullable = false, length = 30)
+    @NotBlank
     private String block;
+
 /*poderia utilizar o @Getter ou @Data
 pra diminuir a verbosidade*/
-    public static UUID getId() {
-        return id;
-    }
-
-    public static void setId(UUID id) {
-        ParkingSpotModel.id = id;
-    }
 
     public String getParkingSpotNumber() {
         return parkingSpotNumber;
@@ -83,14 +64,6 @@ pra diminuir a verbosidade*/
 
     public void setColorCar(String colorCar) {
         this.colorCar = colorCar;
-    }
-
-    public LocalDateTime getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(LocalDateTime registrationDate) {
-        this.registrationDate = registrationDate;
     }
 
     public String getResponsibleName() {
